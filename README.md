@@ -2,17 +2,61 @@
 
 [![GitHub Build Status](https://github.com/cisagov/cyhy-lambda-bucket-terraform/workflows/build/badge.svg)](https://github.com/cisagov/cyhy-lambda-bucket-terraform/actions)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) [Terraform
-module](https://www.terraform.io/docs/modules/index.html) GitHub
-repository started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
+This project creats an AWS S3 bucket to store the deployment artifacts for any
+AWS Lambdas that will be used in a [CyHy](https://github.com/cisagov/cyhy_amis)
+environment.
 
-See [here](https://www.terraform.io/docs/modules/index.html) for more
-details on Terraform modules and the standard module structure.
+## Pre-requisites ##
+
+- [Terraform](https://www.terraform.io/) installed on your system.
+- AWS CLI access
+  [configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+  for the appropriate account on your system.
+- An accessible AWS S3 bucket to store Terraform state
+  (specified in [`backend.tf`](backend.tf)).
+- An accessible AWS DynamoDB database to store the Terraform state lock
+  (specified in [`backend.tf`](backend.tf)).
+
+## Customizing Your Environment ##
+
+Create a terraform variables file to be used for your environment (e.g.
+  `production.tfvars`), based on the variables listed in [Inputs](#inputs)
+  below. Here is a sample of what that file might look like:
+
+```hcl
+aws_region = "us-east-2"
+
+tags = {
+  Team = "CISA Development Team"
+  Application = "Cyber Hygiene Lambda Artifacts"
+  Workspace = "production"
+}
+```
+
+## Building the Terraform-based infrastructure ##
+
+1. Create a Terraform workspace (if you haven't already done so) by running:
+
+   ```console
+   terraform workspace new <workspace_name>`
+   ```
+
+1. Create a `<workspace_name>.tfvars` file with all of the required
+   variables and any optional variables desired (see [Inputs](#inputs) below
+   for details).
+1. Run the command `terraform init`.
+1. Create the Terraform infrastructure by running the command:
+
+   ```console
+   terraform apply -var-file=<workspace_name>.tfvars
+   ```
+
+## Tearing down the Terraform-based infrastructure ##
+
+1. Select the appropriate Terraform workspace by running
+   `terraform workspace select <workspace_name>`.
+1. Destroy the Terraform infrastructure in that workspace by running
+   `terraform destroy -var-file=<workspace_name>.tfvars`.
 
 ## Requirements ##
 
@@ -45,7 +89,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | aws\_region | The AWS region to deploy into (e.g. us-east-1). | `string` | `"us-east-1"` | no |
-| lambda\_artifact\_s3\_bucket | The name of the bucket where any Lambda deployment artifacts for a CyHy environment will be stored.  Note that in production Terraform workspaces, the string '-production' will be appended to the bucket name.  In non-production workspaces, '-<workspace\_name>' will be appended to the bucket name. | `string` | `"cyhy-lambda-deployment-artifacts"` | no |
+| lambda\_artifacts\_s3\_bucket | The name of the bucket where any Lambda deployment artifacts for a CyHy environment will be stored.  Note that in production Terraform workspaces, the string '-production' will be appended to the bucket name.  In non-production workspaces, '-<workspace\_name>' will be appended to the bucket name. | `string` | `"cyhy-lambda-deployment-artifacts"` | no |
 | tags | Tags to apply to all AWS resources created. | `map(string)` | `{}` | no |
 
 ## Outputs ##
