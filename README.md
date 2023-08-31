@@ -14,22 +14,6 @@ appropriate for the major languages that we use.
 See [here](https://www.terraform.io/docs/modules/index.html) for more
 details on Terraform modules and the standard module structure.
 
-## Usage ##
-
-```hcl
-module "example" {
-  source = "github.com/cisagov/cyhy-lambda-bucket-terraform"
-
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
-}
-```
-
-## Examples ##
-
-- [Basic usage](https://github.com/cisagov/cyhy-lambda-bucket-terraform/tree/develop/examples/basic_usage)
-
 ## Requirements ##
 
 | Name | Version |
@@ -77,8 +61,7 @@ No modules.
 ## Notes ##
 
 Running `pre-commit` requires running `terraform init` in every directory that
-contains Terraform code. In this repository, these are the main directory and
-every directory under `examples/`.
+contains Terraform code. In this repository, this is only the main directory.
 
 ## New Repositories from a Skeleton ##
 
