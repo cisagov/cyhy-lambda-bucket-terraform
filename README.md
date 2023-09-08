@@ -2,7 +2,7 @@
 
 [![GitHub Build Status](https://github.com/cisagov/cyhy-lambda-bucket-terraform/workflows/build/badge.svg)](https://github.com/cisagov/cyhy-lambda-bucket-terraform/actions)
 
-This project creats an AWS S3 bucket to store the deployment artifacts for any
+This project creates an AWS S3 bucket to store the deployment artifacts for any
 AWS Lambdas that will be used in a [CyHy](https://github.com/cisagov/cyhy_amis)
 environment.
 
@@ -19,7 +19,7 @@ environment.
 
 ## Customizing Your Environment ##
 
-Create a terraform variables file to be used for your environment (e.g.
+Create a Terraform variables file to be used for your environment (e.g.
   `production.tfvars`), based on the variables listed in [Inputs](#inputs)
   below. Here is a sample of what that file might look like:
 
