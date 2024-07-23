@@ -1,10 +1,7 @@
 # This bucket is used to store the deployment packages for any Lambda functions
 # that will be used in a CyHy environment.
 resource "aws_s3_bucket" "lambda_artifacts" {
-  # Note that in production Terraform workspaces, the string '-production' is
-  # appended to the bucket name.  In non-production workspaces,
-  # '-<workspace_name>' is appended to the bucket name.
-  bucket = format("%s-%s", var.lambda_artifacts_s3_bucket, local.production_workspace ? "production" : terraform.workspace)
+  bucket = local.bucket_name
 
   tags = {
     "Name" = "Lambda Deployment Artifacts"
