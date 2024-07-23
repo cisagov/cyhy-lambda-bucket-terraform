@@ -96,7 +96,10 @@ No modules.
 
 ## Outputs ##
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| access\_point | The multi-region access point used to provide cross-region access to the Lambda deployment artifacts bucket. |
+| bucket | The S3 bucket used to store the deployment artifacts for Lambda functions in a CyHy environment. |
 <!-- END_TF_DOCS -->
 
 ## Notes ##
