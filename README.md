@@ -1,6 +1,8 @@
 # cyhy-lambda-bucket-terraform #
 
 [![GitHub Build Status](https://github.com/cisagov/cyhy-lambda-bucket-terraform/workflows/build/badge.svg)](https://github.com/cisagov/cyhy-lambda-bucket-terraform/actions)
+[![License](https://img.shields.io/github/license/cisagov/cyhy-lambda-bucket-terraform)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/cyhy-lambda-bucket-terraform/workflows/CodeQL/badge.svg)](https://github.com/cisagov/cyhy-lambda-bucket-terraform/actions/workflows/codeql-analysis.yml)
 
 This project creates an AWS S3 bucket to store the deployment artifacts for any
 AWS Lambdas that will be used in a [CyHy](https://github.com/cisagov/cyhy_amis)
